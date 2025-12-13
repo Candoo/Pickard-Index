@@ -1,0 +1,78 @@
+# Version tag removed, as it's obsolete in modern Docker Compose.
+
+services:
+  # -----------------------------------
+  # 1. DATABASE SERVICE (PostgreSQL)
+  # -----------------------------------
+  db:
+    image: postgres:16-alpine # Using a lightweight, production-ready image
+    container_name: postgres_pickard_db
+    restart: always # Always restart if it fails
+    environment:
+      # CRITICAL: These must match what your Go Gin app expects for connection
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres # *** CHANGE THIS TO A SECURE PASSWORD ***
+      POSTGRES_DB: thornton_pickard
+    volumes:
+      # Persist the database data outside the container
+      - postgres_data:/var/lib/postgresql/data
+    # Optionally expose the port if you need to access it from PgAdmin/external tools
+    # ports:
+    #   - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d thornton_pickard"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # -----------------------------------
+  # 2. GO GIN API SERVICE
+  # -----------------------------------
+  api:
+    # Use the local API repository as the build context
+    build:
+      context: ../thornton-pickard-api
+      dockerfile: Dockerfile
+    container_name: go_api_server
+    image: thornton-pickard-api:latest
+    ports:
+      - "8080:8080"
+      
+    # CRITICAL FIX: Ensure the API waits for the DB to start.
+    depends_on:
+      db:
+        condition: service_healthy 
+      
+    environment:
+      # CRITICAL FIX: Inject the database credentials using the service name 'db' as the host.
+      # You may need to adapt these variable names to exactly match what your Go code reads.
+      DB_HOST: db                    # Hostname is the service name!
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_NAME: thornton_pickard
+      DB_PASSWORD: postgres  # MUST match the DB service above
+      
+      # Include the UI environment variable here for completeness (though the UI reads it)
+      VITE_APP_API_URL: http://api:8080 
+    
+  # -----------------------------------
+  # 3. REACT UI SERVICE (Served by Nginx in Production)
+  # -----------------------------------
+  ui:
+    # Use the local UI repository as the build context
+    build:
+      context: ../my-modern-react-setup
+      dockerfile: Dockerfile
+    container_name: react_ui_app
+    image: my-modern-react-setup:latest
+    ports:
+      - "3000:80"
+    depends_on:
+      - api # UI depends on API (which now depends on DB)
+    environment:
+      # This variable tells the React app where to find the API service.
+      - VITE_APP_API_URL=http://api:8080 
+
+# Define a volume for persistent database data
+volumes:
+  postgres_data:

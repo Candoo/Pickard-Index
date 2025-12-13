@@ -1,0 +1,16 @@
+# Ignore the actual environment file (contains secrets)
+.env
+
+# Ignore any local overrides
+docker-compose.override.yml
+
+# Ignore system files
+.DS_Store
+
+# Ignore the volume data directory
+/data/
+
+# EXCLUDE SOURCE REPOSITORIES
+# These directories contain separate Git repositories and are cloned by the user.
+/api/
+/ui/
