@@ -12,6 +12,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # ports:
+    #   - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d thornton_pickard"]
       interval: 5s
@@ -48,14 +50,15 @@ services:
   ui:
     build:
       context: ../my-modern-react-setup
-      dockerfile: Dockerfile
-      args:
-        VITE_APP_API_URL: /api/v1
-    container_name: react_ui_app
+      dockerfile: Dockerfile.dev
+    container_name: react_ui_app_dev
     image: my-modern-react-setup:latest
     ports:
-      - "80:80"
+      - "5173:5173"
+    environment:
+      VITE_APP_API_URL: http://host.docker.internal:8080/api/v1
     depends_on:
-      - api 
-volumes:
-  postgres_data:
+      - api
+    volumes:
+      - ../my-modern-react-setup:/app 
+      - /app/node_modules 
