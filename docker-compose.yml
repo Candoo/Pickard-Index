@@ -7,9 +7,9 @@ services:
     container_name: postgres_pickard_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres 
-      POSTGRES_DB: thornton_pickard
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     # ports:
@@ -39,9 +39,10 @@ services:
     environment:
       DB_HOST: db           
       DB_PORT: 5432
-      DB_USER: postgres
-      DB_NAME: thornton_pickard
-      DB_PASSWORD: postgres
+      DB_USER: ${POSTGRES_USER}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_SERVICE_NAME: ${APP_SERVICE_NAME}
     
   # -----------------------------------
   # 3. REACT UI SERVICE (Served by Nginx in Production)
