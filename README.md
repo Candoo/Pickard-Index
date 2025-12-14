@@ -16,14 +16,14 @@ The Thornton Pickard application is designed for camera collectors, historians, 
 
 This full-stack application consists of three separate repositories:
 
-1. **[thornton-pickard-api](https://github.com/Candoo/thornton-pickard-api)** - Go/Gin REST API backend
-2. **[my-modern-react-setup](https://github.com/Candoo/my-modern-react-setup)** - React 19 frontend with TypeScript
-3. **Pickard-Index** (this repo) - Docker Compose deployment configuration
+1. **[Thornton-Pickard-Api](https://github.com/Candoo/Thornton-Pickard-Api)** - Go/Gin REST API backend
+2. **[Thornton-Pickard-Ui](https://github.com/Candoo/Thornton-Pickard-Ui)** - React 19 frontend with TypeScript
+3. **Thornton-Pickard-Deployment** (this repo) - Docker Compose deployment configuration
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │                                                     │
-│  React Frontend (my-modern-react-setup)             │
+│  React Frontend (Thornton-Pickard-Ui)             │
 │  Port: 3000                                         │
 │                                                     │
 └──────────────────┬──────────────────────────────────┘
@@ -32,7 +32,7 @@ This full-stack application consists of three separate repositories:
                    │
 ┌──────────────────▼──────────────────────────────────┐
 │                                                     │
-│  Go/Gin API (thornton-pickard-api)                  │
+│  Go/Gin API (Thornton-Pickard-Api)                  │
 │  Port: 8080                                         │
 │                                                     │
 └──────────────────┬──────────────────────────────────┘
@@ -68,24 +68,24 @@ Follow these steps to get the entire application running on your local machine.
 2. **Clone all three repositories into this central workspace:**
 
    ```bash
-   git clone https://github.com/Candoo/Pickard-Index.git
-   git clone https://github.com/Candoo/thornton-pickard-api.git
-   git clone https://github.com/Candoo/my-modern-react-setup.git
+   git clone https://github.com/Candoo/Thornton-Pickard-Deployment.git
+   git clone https://github.com/Candoo/Thornton-Pickard-Api.git
+   git clone https://github.com/Candoo/Thornton-Pickard-Ui.git
    ```
 
    **Your resulting directory structure MUST look like this:**
 
    ```
    Projects/
-   ├── thornton-pickard-api/
-   ├── my-modern-react-setup/
-   └── Pickard-Index/          <-- Deployment configuration
+   ├── Thornton-Pickard-Api/
+   ├── Thornton-Pickard-Ui/
+   └── Thornton-Pickard-Deployment/          <-- Deployment configuration
    ```
 
 3. **Navigate into the deployment directory:**
 
    ```bash
-   cd Pickard-Index
+   cd Thornton-Pickard-Deployment
    ```
 
 4. **Configure environment variables:**
@@ -208,8 +208,8 @@ Pickard-Index/
 
 Each repository has its own README with development instructions:
 
-- **Frontend Development:** See [my-modern-react-setup/README.md](https://github.com/Candoo/my-modern-react-setup)
-- **Backend Development:** See [thornton-pickard-api/README.md](https://github.com/Candoo/thornton-pickard-api)
+- **Frontend Development:** See [Thornton-Pickard-Ui/README.md](https://github.com/Candoo/Thornton-Pickard-Ui)
+- **Backend Development:** See [Thornton-Pickard-Api/README.md](https://github.com/Candoo/Thornton-Pickard-Api)
 
 ### Running Services Individually
 
@@ -217,13 +217,13 @@ You can also run services outside of Docker for development:
 
 1. **Backend only:**
    ```bash
-   cd ../thornton-pickard-api
+   cd ../Thornton-Pickard-Api
    # Follow backend README for local setup
    ```
 
 2. **Frontend only:**
    ```bash
-   cd ../my-modern-react-setup
+   cd ../Thornton-Pickard-Ui
    # Follow frontend README for local setup
    ```
 
@@ -329,14 +329,14 @@ MIT License - see individual repositories for details.
 
 For issues related to:
 
-- **Frontend:** Open issue in [my-modern-react-setup](https://github.com/Candoo/my-modern-react-setup/issues)
-- **Backend:** Open issue in [thornton-pickard-api](https://github.com/Candoo/thornton-pickard-api/issues)
+- **Frontend:** Open issue in [Thornton-Pickard-Ui](https://github.com/Candoo/Thornton-Pickard-Ui/issues)
+- **Backend:** Open issue in [Thornton-Pickard-Api](https://github.com/Candoo/Thornton-Pickard-Api/issues)
 - **Deployment:** Open issue in this repository
 
 ## 🔗 Related Links
 
-- [Frontend Repository](https://github.com/Candoo/my-modern-react-setup)
-- [Backend API Repository](https://github.com/Candoo/thornton-pickard-api)
+- [Frontend Repository](https://github.com/Candoo/Thornton-Pickard-Ui)
+- [Backend API Repository](https://github.com/Candoo/Thornton-Pickard-Api)
 - [API Documentation](http://localhost:8080/swagger/index.html) (when running)
 
 ---
