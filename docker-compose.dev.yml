@@ -45,20 +45,29 @@ services:
       APP_SERVICE_NAME: ${APP_SERVICE_NAME}
     
   # -----------------------------------
-  # 3. REACT UI SERVICE (Served by Nginx in Production)
+  # 3. REACT UI SERVICE
   # -----------------------------------
   ui:
     build:
       context: ../my-modern-react-setup
       dockerfile: Dockerfile.dev
-    container_name: react_ui_app_dev
-    image: my-modern-react-setup:latest
     ports:
       - "5173:5173"
     environment:
-      VITE_APP_API_URL: http://host.docker.internal:8080/api/v1
+      - VITE_APP_API_URL=http://localhost:8080/api/v1
+    command: npm run dev
     depends_on:
       - api
     volumes:
-      - ../my-modern-react-setup:/app 
-      - /app/node_modules 
+      - ../my-modern-react-setup/src:/app/src
+      - ../my-modern-react-setup/public:/app/public
+      - ../my-modern-react-setup/index.html:/app/index.html
+      - ../my-modern-react-setup/vite.config.ts:/app/vite.config.ts
+      - ../my-modern-react-setup/tailwind.config.js:/app/tailwind.config.js
+      - ../my-modern-react-setup/tsconfig.json:/app/tsconfig.json
+      - ../my-modern-react-setup/tsconfig.app.json:/app/tsconfig.app.json
+      - ../my-modern-react-setup/tsconfig.node.json:/app/tsconfig.node.json
+      - ../my-modern-react-setup/eslint.config.js:/app/eslint.config.js
+      - ../my-modern-react-setup/.prettierrc:/app/.prettierrc
+      - ../my-modern-react-setup/.env:/app/.env
+      - /app/node_modules
