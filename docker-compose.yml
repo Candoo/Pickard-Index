@@ -47,7 +47,7 @@ services:
   # -----------------------------------
   ui:
     build:
-      context: ..Thornton-Pickard-Ui
+      context: ../Thornton-Pickard-Ui
       dockerfile: Dockerfile
       args:
         VITE_APP_API_URL: /api/v1
