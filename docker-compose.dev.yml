@@ -25,7 +25,7 @@ services:
   # -----------------------------------
   api:
     build:
-      context: ../thornton-pickard-api
+      context: ../Thornton-Pickard-Api
       dockerfile: Dockerfile
     container_name: go_api_server
     image: thornton-pickard-api:latest
@@ -49,7 +49,7 @@ services:
   # -----------------------------------
   ui:
     build:
-      context: ../my-modern-react-setup
+      context: ../Thornton-Pickard-Ui
       dockerfile: Dockerfile.dev
     ports:
       - "5173:5173"
@@ -59,15 +59,15 @@ services:
     depends_on:
       - api
     volumes:
-      - ../my-modern-react-setup/src:/app/src
-      - ../my-modern-react-setup/public:/app/public
-      - ../my-modern-react-setup/index.html:/app/index.html
-      - ../my-modern-react-setup/vite.config.ts:/app/vite.config.ts
-      - ../my-modern-react-setup/tailwind.config.js:/app/tailwind.config.js
-      - ../my-modern-react-setup/tsconfig.json:/app/tsconfig.json
-      - ../my-modern-react-setup/tsconfig.app.json:/app/tsconfig.app.json
-      - ../my-modern-react-setup/tsconfig.node.json:/app/tsconfig.node.json
-      - ../my-modern-react-setup/eslint.config.js:/app/eslint.config.js
-      - ../my-modern-react-setup/.prettierrc:/app/.prettierrc
-      - ../my-modern-react-setup/.env:/app/.env
+      - ../Thornton-Pickard-Ui/src:/app/src
+      - ../Thornton-Pickard-Ui/public:/app/public
+      - ../Thornton-Pickard-Ui/index.html:/app/index.html
+      - ../Thornton-Pickard-Ui/vite.config.ts:/app/vite.config.ts
+      - ../Thornton-Pickard-Ui/tailwind.config.js:/app/tailwind.config.js
+      - ../Thornton-Pickard-Ui/tsconfig.json:/app/tsconfig.json
+      - ../Thornton-Pickard-Ui/tsconfig.app.json:/app/tsconfig.app.json
+      - ../Thornton-Pickard-Ui/tsconfig.node.json:/app/tsconfig.node.json
+      - ../Thornton-Pickard-Ui/eslint.config.js:/app/eslint.config.js
+      - ../Thornton-Pickard-Ui/.prettierrc:/app/.prettierrc
+      - ../Thornton-Pickard-Ui/.env:/app/.env
       - /app/node_modules

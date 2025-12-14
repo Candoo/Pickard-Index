@@ -23,7 +23,7 @@ services:
   # -----------------------------------
   api:
     build:
-      context: ../thornton-pickard-api
+      context: ../Thornton-Pickard-Api
       dockerfile: Dockerfile
     container_name: go_api_server
     image: thornton-pickard-api:latest
@@ -47,12 +47,12 @@ services:
   # -----------------------------------
   ui:
     build:
-      context: ../my-modern-react-setup
+      context: ..Thornton-Pickard-Ui
       dockerfile: Dockerfile
       args:
         VITE_APP_API_URL: /api/v1
     container_name: react_ui_app
-    image: my-modern-react-setup:latest
+    image: thornton-pickard-ui:latest
     ports:
       - "80:80"
     depends_on:
